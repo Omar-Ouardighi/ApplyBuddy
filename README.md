@@ -20,7 +20,7 @@ To run both the backend and frontend with Docker, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/lazy-apply-ai.git
+    git clone https://github.com/your-username/Lazy-Apply-AI.git
     cd lazy-apply-ai
     ```
 2. Build the Docker images:
