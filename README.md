@@ -1,6 +1,7 @@
-# Lazy-Apply-AI
+# ApplyBuddy
 
-Lazy Apply AI is a full-stack web application designed to simplify the job application process. The app allows users to upload their resumes (CV) and job descriptions, then generates tailored cover letters or performs a job fit analysis based on the user's profile.
+
+ApplyBuddy is a full-stack web application designed to simplify the job application process. The app allows users to upload their resumes (CV) and job descriptions, then generates tailored cover letters or performs a job fit analysis based on the user's profile.
 
 ## Features
 
@@ -20,15 +21,20 @@ To run both the backend and frontend with Docker, follow these steps:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/lazy-apply-ai.git
+    git clone https://github.com/Omar-Ouardighi/ApplyBuddy.git
     cd lazy-apply-ai
     ```
-2. Build the Docker images:
+2. add Openai Api Key to .env
+    ```bash
+    OPENAI_API_KEY = ""
+    ```
+  
+3. Build the Docker images:
     ```bash
     docker-compose build
     ```
 
-3. Run the containers:
+4. Run the containers:
     ```bash
     docker-compose up
     ```
@@ -36,7 +42,7 @@ To run both the backend and frontend with Docker, follow these steps:
     - Frontend: [http://localhost:3000](http://localhost:3000)
     - Backend: [http://localhost:8000](http://localhost:8000)
 
-4. To stop the containers:
+5. To stop the containers:
     ```bash
     docker-compose down
     ```

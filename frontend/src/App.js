@@ -14,7 +14,8 @@ const App = () => {
         <div className="container-fluid">
           <a className="navbar-brand mx-auto d-flex align-items-center" href="/">
             <i className="bi bi-robot me-2" style={{ fontSize: '4rem' }}></i> 
-            <span style={{ fontSize: '4rem', fontWeight: 'bold' }}>Lazy Apply AI</span>
+            <span style={{ fontSize: '4rem', fontWeight: 'bold' }}>Apply Buddy
+            </span>
           </a>
         </div>
       </nav>
