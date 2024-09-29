@@ -2,7 +2,7 @@ from fastapi import FastAPI, File, Form, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from PyPDF2 import PdfReader
-import llm
+from llm import ApplyBuddy
 import io
 
 app = FastAPI()
@@ -24,7 +24,8 @@ async def generate_cover_letter(
         cv_text = extract_text_from_pdf(cv_pdf.file)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error reading PDF file: {e}")
-    
+        
+    llm = ApplyBuddy()
     cover_letter = llm.generate_cover_letter(cv_text, job_description)
     return JSONResponse(content={"cover_letter": cover_letter})
 
@@ -38,6 +39,7 @@ async def job_fit_analysis(
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error reading PDF file: {e}")
     
+    llm = ApplyBuddy()
     job_fit_assessment = llm.job_fit_analysis(cv_text, job_description)
     return JSONResponse(content={"job_fit_analysis": job_fit_assessment})
 

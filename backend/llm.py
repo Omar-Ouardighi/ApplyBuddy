@@ -1,13 +1,14 @@
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import BaseMessage
 from decouple import config
 
-openai_api_key = config('OPENAI_API_KEY')
+class ApplyBuddy:
+    def __init__(self):
+        self.openai_api_key = config('OPENAI_API_KEY')
+        self.model = ChatOpenAI(model='gpt-4o-mini', api_key=self.openai_api_key)
 
-def generate_cover_letter(resume: str, job_description: str) -> str:
-    model = ChatOpenAI(model='gpt-4o-mini', api_key=openai_api_key)
-    template = """
-Using my CV and the job description you provided, could you help me draft a compelling cover letter for this position in the same language as the job description? 
+    def generate_cover_letter(self, resume: str, job_description: str) -> str:
+        template = """
+Using my CV and the job description you provided, could you help me draft a compelling cover letter for this position? 
 Please emphasize my motivation for applying and highlight my relevant skills and qualifications, avoiding unnecessary repetition of the job listing. The goal is to present a narrative that allows the reader to clearly 
 understand my suitability without directly stating alignment. 
 Additionally, I would like the letter to conclude with a confident and assertive closing statement that reinforces my readiness and enthusiasm for the role.
@@ -17,17 +18,14 @@ Additionally, I would like the letter to conclude with a confident and assertive
 ### Candidate CV:
 {cv}
         """
-    prompt_text = template.format(
-        job_description=job_description,
-        cv=resume
+        prompt_text = template.format(
+            job_description=job_description,
+            cv=resume
         )
+        return self.model.invoke(prompt_text).content
 
-    return model.invoke(prompt_text).content
-
-
-def job_fit_analysis(resume: str, job_description: str) -> str:
-    model = ChatOpenAI(model='gpt-4o-mini', api_key=openai_api_key)
-    template = """
+    def job_fit_analysis(self, resume: str, job_description: str) -> str:
+        template = """
 You are tasked with analyzing a candidate's CV in relation to a given job description.
 
 1. **Skills Match**: Identify the skills required in the job description. Then, evaluate whether the candidate possesses these skills based on the CV provided. List matching skills and missing skills.
@@ -47,10 +45,8 @@ You are tasked with analyzing a candidate's CV in relation to a given job descri
 - **Experience Match**: (Assess experience match)
 - **Overall Fit Score**: (Between 0-100)
 """
-
-    prompt_text = template.format(
-        job_description=job_description,
-        cv=resume
-)
-    return model.invoke(prompt_text).content
-
+        prompt_text = template.format(
+            job_description=job_description,
+            cv=resume
+        )
+        return self.model.invoke(prompt_text).content
